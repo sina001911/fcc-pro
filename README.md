@@ -15,7 +15,7 @@
 [![Formatter: Ruff](https://img.shields.io/badge/Formatter-ruff-bf4b00.svg?style=for-the-badge)](https://github.com/astral-sh/ruff)
 [![Logging: Loguru](https://img.shields.io/badge/logging-loguru-00695c.svg?style=for-the-badge)](https://github.com/Delgan/loguru)
 
-[Quick Start](#quick-start) · [Providers](#choose-a-provider) · [Clients](#connect-your-client) · [Integrations](#optional-integrations) · [Manage](#manage-your-installation)
+[Overview](#what-is-fcc-pro) · [Features](#why-fcc-pro) · [Agents](#supported-coding-agents) · [Quick Start](#quick-start) · [Providers](#choose-a-provider) · [Clients](#connect-your-client) · [Integrations](#optional-integrations)
 
 </div>
 
@@ -23,24 +23,76 @@
   <em>Independent open-source project. Not affiliated with or endorsed by Anthropic. Claude and Claude Code are trademarks of Anthropic.</em>
 </p>
 
-## Features
+## What is FCC Pro?
 
-- Route any supported harness to models from any supported provider.
-- 12 supported harnesses: [Claude Code](https://code.claude.com/docs/en/overview), [Codex](https://github.com/openai/codex), [Pi](https://github.com/earendil-works/pi), [OpenCode](https://github.com/anomalyco/opencode), [Cline](https://github.com/cline/cline), [Hermes](https://github.com/NousResearch/hermes-agent), [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), [Grok Build](https://github.com/xai-org/grok-build), [Muse Code](https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2/), [Aider](https://aider.chat/), [Antigravity CLI](https://antigravity.google/docs/getting-started/), or [VS Code Chat](https://code.visualstudio.com/).
-  - Preserved native streaming, tool use, and interleaved thinking for maximum performance.
-  - For Claude Code, route [Fable](https://www.anthropic.com/claude/fable), [Opus](https://www.anthropic.com/claude/opus), [Sonnet](https://www.anthropic.com/claude/sonnet), and [Haiku](https://www.anthropic.com/claude/haiku) to supported models.
-- 61 supported providers, including free, paid, subscription, and local providers.
-  - 1.3B+ free tokens per month.
-  - FCC follows provider TOS and removes integrations if they stop being allowed.
-- Use through the terminal, desktop apps ([Codex App](https://learn.chatgpt.com/docs/app), [Claude Desktop](https://claude.ai/download), and [DeepSeek Desktop](https://github.com/deepseek-ai/deepseek-harness)), IDE extensions ([VS Code](https://code.visualstudio.com/) and [JetBrains](https://www.jetbrains.com/)), your phone ([Discord](https://discord.com/) and [Telegram](https://telegram.org/)), or your browser through native Code sessions.
-  - Voice notes supported for Discord and Telegram using local [Whisper](https://github.com/openai/whisper) or [NVIDIA NIM](https://docs.nvidia.com/nim/speech/latest/asr/deploy-asr-models/whisper.html).
-- Up to 90% lower token usage using [RTK](https://github.com/rtk-ai/rtk) and [Headroom](https://github.com/headroomlabs-ai/headroom).
-- State-of-the-art reliability features so you can keep coding through provider outages:
-  - Automatic retries.
-  - Configurable rate limits.
-  - Configurable concurrency control.
-  - Automatic model/provider fallback.
-  - Automatic multi-API key fallback.
+**FCC Pro is an open-source, self-hosted AI gateway and control center for coding agents.** It lets you connect supported coding tools to a broad range of cloud and local model providers through one local service, then manage model selection, routing, fallbacks, and integrations from a central Admin UI.
+
+Use the coding agent you already prefer. Choose the model and provider that fit the task. Keep your clients connected through a consistent local endpoint.
+
+## Why FCC Pro?
+
+- **One gateway, many providers** — route supported coding agents to cloud, subscription-based, and local model providers.
+- **Flexible model selection** — choose models centrally and configure Claude Code model tiers where supported.
+- **Resilient routing** — configure retries, rate limits, concurrency, model/provider fallbacks, and multiple API keys.
+- **Native agent workflows** — preserve streaming, tool use, and interleaved thinking for supported harnesses.
+- **Centralized management** — configure providers, models, clients, and integrations in the FCC Admin UI.
+- **Use it where you work** — connect terminal agents, desktop apps, IDEs, and supported Discord or Telegram workflows.
+- **Optional token optimization** — integrate [RTK](https://github.com/rtk-ai/rtk) and [Headroom](https://github.com/headroomlabs-ai/headroom) for supported agents.
+
+## FCC Pro at a glance
+
+| Capability | What it provides |
+| --- | --- |
+| Coding-agent support | 12 supported harnesses and clients |
+| Provider ecosystem | 61 listed cloud, subscription, and local providers |
+| Model routing | Central model selection, Claude Code tier overrides, and ordered fallbacks |
+| Reliability | Retries, rate limits, concurrency controls, and API-key fallback |
+| Local models | Support for LM Studio, llama.cpp, and Ollama |
+| Integrations | Desktop apps, IDEs, Discord, Telegram, and voice-note workflows |
+| Token optimization | Optional RTK and Headroom integration |
+
+## Supported coding agents
+
+FCC currently documents support for:
+
+[Claude Code](https://code.claude.com/docs/en/overview) · [Codex](https://github.com/openai/codex) · [Pi](https://github.com/earendil-works/pi) · [OpenCode](https://github.com/anomalyco/opencode) · [Cline](https://github.com/cline/cline) · [Hermes](https://github.com/NousResearch/hermes-agent) · [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) · [Grok Build](https://github.com/xai-org/grok-build) · [Muse Code](https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2/) · [Aider](https://aider.chat/) · [Antigravity CLI](https://antigravity.google/docs/getting-started/) · [VS Code Chat](https://code.visualstudio.com/).
+
+## How FCC Pro fits into your workflow
+
+FCC runs locally between your coding client and the model provider. Your client connects to FCC; FCC applies your configured routing and reliability policies, then communicates with the selected provider or local model server.
+
+```text
+┌───────────────────────────────────────────────┐
+│ Coding agents · IDEs · Desktop apps · Bots    │
+└──────────────────────────┬────────────────────┘
+                           │
+                           ▼
+┌───────────────────────────────────────────────┐
+│                  FCC Pro                      │
+│             Local AI Gateway                  │
+│                                               │
+│  Model routing · Admin UI · Fallbacks         │
+│  Retries · Rate limits · Concurrency          │
+└──────────────────────────┬────────────────────┘
+                           │
+             ┌─────────────┴─────────────┐
+             ▼                           ▼
+┌────────────────────────┐  ┌────────────────────────┐
+│ Cloud / subscription   │  │ Local model servers    │
+│ model providers        │  │ Ollama · LM Studio     │
+│                        │  │ llama.cpp              │
+└────────────────────────┘  └────────────────────────┘
+```
+
+## Get started
+
+1. **Install FCC Pro** — follow the [Quick Start](#quick-start) instructions for Windows, macOS, or Linux.
+2. **Start FCC** — open the desktop app or run `fcc-server` where applicable.
+3. **Connect a provider** — add your provider credentials or connect an available OAuth provider in **Admin UI → Providers**.
+4. **Choose a model** — select a model in **Model Config** and click **Apply**.
+5. **Launch your coding agent** — use the matching FCC launcher or connect your client from **Admin UI → Integrations**.
+
+Continue with the [provider catalog](#choose-a-provider), [client setup](#connect-your-client), and [optional integrations](#optional-integrations).
 
 Free-tier availability and limits are controlled by each provider and may change.
 
